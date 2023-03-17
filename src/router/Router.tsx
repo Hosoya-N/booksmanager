@@ -1,8 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { Home } from "../components/pages/home/Home";
-import { Setting } from "../components/pages/home/Setting";
+import { Return } from "../components/pages/home/Return";
 import { UserManagement } from "../components/pages/home/UserManagement";
 
 import { Page404 } from "../components/pages/Page404";
@@ -13,25 +12,19 @@ export const Router = () => {
     <Routes>
       <Route path="/" element={
         <HeaderLayout>
-          <Home />
+          <UserManagement />
         </HeaderLayout>
       } />
 
-      <Route path="/home" element={
-        <HeaderLayout>
-          <Home />
-        </HeaderLayout>
-      } />
-
-      <Route path="/user_management" element={
+      <Route path="/book_management" element={
         <HeaderLayout>
           <UserManagement />
         </HeaderLayout>
       } />
 
-      <Route path="/setting" element={
+      <Route path="/return" element={
         <HeaderLayout>
-          <Setting />
+          <Return />
         </HeaderLayout>
       } />
 

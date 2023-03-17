@@ -10,12 +10,11 @@ export const Header: VFC = memo(() => {
 
   const navigate = useNavigate();
 
-  const onClickHome = useCallback(() => navigate("/home"), []);
   const onClickUserManagement = useCallback(
-    () => navigate("/user_management"),
+    () => navigate("/book_management"),
     []
   );
-  const onClickSetting = useCallback(() => navigate("/setting"), []);
+  const onClickReturn = useCallback(() => navigate("/return"), []);
 
   return (
     <>
@@ -32,7 +31,7 @@ export const Header: VFC = memo(() => {
           as="a"
           mr={8}
           _hover={{ cursor: "pointer" }}
-          onClick={onClickHome}
+          onClick={onClickUserManagement}
         >
           <Heading as="h1" fontSize={{ base: "md", md: "lg" }}>
             書籍管理アプリ
@@ -45,10 +44,10 @@ export const Header: VFC = memo(() => {
           flexGrow={2}
         >
           <Box pr={4}>
-            <Link onClick={onClickUserManagement}>ユーザー一覧</Link>
+            <Link onClick={onClickUserManagement}>書籍一覧</Link>
           </Box>
           <Box>
-            <Link onClick={onClickSetting}>設定</Link>
+            <Link onClick={onClickReturn}>返却</Link>
           </Box>
         </Flex>
         <MenuIconButton onOpen={onOpen} />
@@ -56,9 +55,8 @@ export const Header: VFC = memo(() => {
       <MenuDrawer
         isOpen={isOpen}
         onClose={onClose}
-        onClickHome={onClickHome}
         onClickUserManagement={onClickUserManagement}
-        onClickSetting={onClickSetting}
+        onClickReturn={onClickReturn}
       />
     </>
   );
