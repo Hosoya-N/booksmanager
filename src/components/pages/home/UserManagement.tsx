@@ -8,22 +8,22 @@ import {
 } from "@chakra-ui/react";
 
 import { UserCard } from "../../organisms/user/UserCard";
-import { useAllUsers } from "../../../hooks/useAllUsers";
-import { UserDetailModal } from "../../organisms/modal/UserDetailModal";
-import { useSelectUser } from "../../../hooks/useSelectUser";
+import { useAllBooks } from "../../../hooks/useAllBooks";
+import { BookDetailModal } from "../../organisms/modal/BookDetailModal";
+import { useSelectBook } from "../../../hooks/useSelectBook";
 
 export const UserManagement: VFC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { getUsers, loading, users } = useAllUsers();
-  const { onSelectUser, selectedUser } = useSelectUser();
+  const { getBooks, loading, books } = useAllBooks();
+  const { onSelectBook, selectedBook } = useSelectBook();
 
-  useEffect(() => getUsers(), [getUsers]);
+  useEffect(() => getBooks(), [getBooks]);
 
-  const onClickUser = useCallback(
-    (id: number) => {
-      onSelectUser({ id, users, onOpen });
+  const onClickBook = useCallback(
+    (isbn: number) => {
+      onSelectBook({ isbn, books, onOpen });
     },
-    [users, onSelectUser, onOpen]
+    [books, onSelectBook, onOpen]
   );
 
   return (
@@ -34,23 +34,23 @@ export const UserManagement: VFC = memo(() => {
         </Center>
       ) : (
         <Wrap p={{ base: 4, md: 10 }}>
-          {users.map(obj => (
-            <WrapItem key={obj.id} mx="auto">
+          {books.map(obj => (
+            <WrapItem key={obj.isbn} mx="auto">
               <UserCard
-                id={obj.id}
-                imageUrl="https://source.unsplash.com/random"
-                userName={obj.username}
-                fullName={obj.name}
-                onClick={onClickUser}
+                isbn={obj.isbn}
+                imageUrl={obj.imageUrl}
+                title={obj.title}
+                author={"テスト著者"}
+                onClick={onClickBook}
               />
             </WrapItem>
           ))}
         </Wrap>
       )}
-      <UserDetailModal
+      <BookDetailModal
         isOpen={isOpen}
         onClose={onClose}
-        user={selectedUser}
+        book={selectedBook}
       />
     </>
   );
