@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { Return } from "../components/pages/home/Return";
-import { UserManagement } from "../components/pages/home/UserManagement";
+import { BookManagement } from "../components/pages/home/BookManagement";
 
 import { Page404 } from "../components/pages/Page404";
 import { HeaderLayout } from "../components/templates/HeaderLayout";
@@ -12,13 +12,13 @@ export const Router = () => {
     <Routes>
       <Route path="/" element={
         <HeaderLayout>
-          <UserManagement />
+          <BookManagement />
         </HeaderLayout>
       } />
 
       <Route path="/book_management" element={
         <HeaderLayout>
-          <UserManagement />
+          <BookManagement />
         </HeaderLayout>
       } />
 

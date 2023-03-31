@@ -9,13 +9,13 @@ type Props = {
   onClick: (isbn: number) => void;
 };
 
-export const UserCard: VFC<Props> = memo(props => {
+export const BookCard: VFC<Props> = memo(props => {
   const { isbn, imageUrl, title, author, onClick } = props;
 
   return (
     <Box
       w="260px"
-      h="320px"
+      h="340px"
       bg="white"
       borderRadius="10px"
       shadow="md"
@@ -25,8 +25,6 @@ export const UserCard: VFC<Props> = memo(props => {
     >
       <Stack textAlign="center">
         <Image
-          // borderRadius="2px"
-          // boxSize="160px"
           src={imageUrl}
           alt={title}
           m="auto"

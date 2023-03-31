@@ -7,12 +7,12 @@ import {
   WrapItem
 } from "@chakra-ui/react";
 
-import { UserCard } from "../../organisms/user/UserCard";
+import { BookCard } from "../../organisms/user/BookCard";
 import { useAllBooks } from "../../../hooks/useAllBooks";
 import { BookDetailModal } from "../../organisms/modal/BookDetailModal";
 import { useSelectBook } from "../../../hooks/useSelectBook";
 
-export const UserManagement: VFC = memo(() => {
+export const BookManagement: VFC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getBooks, loading, books } = useAllBooks();
   const { onSelectBook, selectedBook } = useSelectBook();
@@ -36,11 +36,11 @@ export const UserManagement: VFC = memo(() => {
         <Wrap p={{ base: 4, md: 10 }}>
           {books.map(obj => (
             <WrapItem key={obj.isbn} mx="auto">
-              <UserCard
+              <BookCard
                 isbn={obj.isbn}
                 imageUrl={obj.imageUrl}
                 title={obj.title}
-                author={"テスト著者"}
+                author={obj.author}
                 onClick={onClickBook}
               />
             </WrapItem>
