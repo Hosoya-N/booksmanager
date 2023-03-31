@@ -26,10 +26,19 @@ export const BookDetailModal: VFC<Props> = memo(props => {
   const { isOpen, onClose, book } = props;
 
   const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [publisher, setPublisher] = useState("");
 
   useEffect(() => {
     setTitle(book?.title ?? "");
+    setAuthor(book?.author ?? "");
+    setPublisher(book?.publisher ?? "");
   }, [book]);
+
+  const onClickLend = () => {
+    console.log(title);
+    alert(title + " を貸し出しを登録しました")
+  };
 
   return (
     <Modal
@@ -53,18 +62,26 @@ export const BookDetailModal: VFC<Props> = memo(props => {
             <FormControl>
               <FormLabel>著者</FormLabel>
               <Input
-                value={"テスト"}
+                value={author}
               />
             </FormControl>
             <FormControl>
               <FormLabel>出版社</FormLabel>
               <Input
-                type="email"
-                value="テスト"              />
+                type="publisher"
+                value={publisher}
+               />
             </FormControl>
+
+            <FormControl>
+             <FormLabel>借用者名</FormLabel>
+             <Input  type="lender" />
+            </FormControl>
+
           </Stack>
         </ModalBody>
         <ModalFooter>
+         <PrimaryButton onClick={onClickLend}>貸出</PrimaryButton>
         </ModalFooter>
       </ModalContent>
     </Modal>
