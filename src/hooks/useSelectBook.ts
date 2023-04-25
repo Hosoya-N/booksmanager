@@ -9,7 +9,7 @@ type Props = {
   onOpen: () => void;
 };
 
-// 選択したユーザー情報を特定しモーダルを表示するカスタムフック
+// 選択した書籍情報を特定しモーダルを表示するカスタムフック
 export const useSelectBook = () => {
   const { showMessage } = useMessage();
 
@@ -19,7 +19,7 @@ export const useSelectBook = () => {
     const { isbn, books, onOpen } = props;
     const targetBook = books.find(obj => obj.isbn === isbn);
     if (!targetBook) {
-      showMessage({ title: "ユーザーが見つかりません", status: "error" });
+      showMessage({ title: "書籍が見つかりません", status: "error" });
       return;
     } else {
       setSelectedBook(targetBook);
