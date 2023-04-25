@@ -28,12 +28,20 @@ export const BookDetailModal: VFC<Props> = memo(props => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [publisher, setPublisher] = useState("");
+  const [isLending, setIsLending] = useState(false);
+  const [lender, setLender] = useState("");
+  
 
   useEffect(() => {
     setTitle(book?.title ?? "");
     setAuthor(book?.author ?? "");
     setPublisher(book?.publisher ?? "");
+    setIsLending(book?.isLending ?? false);
+    setLender(book?.lender ?? "");
   }, [book]);
+
+  const onChangeLender = (e: ChangeEvent<HTMLInputElement>) =>
+  setLender(e.target.value);
 
   const onClickLend = () => {
     console.log(title);
@@ -75,13 +83,20 @@ export const BookDetailModal: VFC<Props> = memo(props => {
 
             <FormControl>
              <FormLabel>借用者名</FormLabel>
-             <Input  type="lender" />
+             <Input  
+              type="lender" 
+              value={lender}
+              isReadOnly={book && book.isLending}
+              onChange={onChangeLender}
+             />
             </FormControl>
 
           </Stack>
         </ModalBody>
         <ModalFooter>
-         <PrimaryButton onClick={onClickLend}>貸出</PrimaryButton>
+          {!isLending && (
+            <PrimaryButton onClick={onClickLend}>貸出</PrimaryButton>
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>

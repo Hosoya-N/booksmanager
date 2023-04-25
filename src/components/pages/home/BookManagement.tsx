@@ -1,10 +1,11 @@
-import { memo, useCallback, useEffect, VFC } from "react";
+import { ChangeEvent, memo, useCallback, useEffect,useState, VFC } from "react";
 import {
   Center,
   Spinner,
   useDisclosure,
   Wrap,
-  WrapItem
+  WrapItem,
+  Checkbox
 } from "@chakra-ui/react";
 
 import { BookCard } from "../../organisms/user/BookCard";
@@ -26,6 +27,11 @@ export const BookManagement: VFC = memo(() => {
     [books, onSelectBook, onOpen]
   );
 
+  const [isForRentOnly, setIsForRentOnly] = useState(false);
+
+  const onCangeCheckbox = () =>
+  setIsForRentOnly(!isForRentOnly);
+
   return (
     <>
       {loading ? (
@@ -33,19 +39,51 @@ export const BookManagement: VFC = memo(() => {
           <Spinner color="teal.200" />
         </Center>
       ) : (
-        <Wrap p={{ base: 4, md: 10 }}>
-          {books.map(obj => (
-            <WrapItem key={obj.isbn} mx="auto">
-              <BookCard
-                isbn={obj.isbn}
-                imageUrl={obj.imageUrl}
-                title={obj.title}
-                author={obj.author}
-                onClick={onClickBook}
-              />
-            </WrapItem>
-          ))}
-        </Wrap>
+        <>
+          <Wrap ml="10" mt="5">
+            <Checkbox 
+              size='md' 
+              colorScheme='green'
+              onChange={onCangeCheckbox}
+              >
+              貸出可能な書籍のみ表示
+            </Checkbox>
+          </Wrap>
+          <Wrap p={{ base: 4, md: 10 }}>
+            {isForRentOnly ? (
+              <>
+                {books.filter(obj => !obj.isLending)
+                      .map(obj => (
+                <WrapItem key={obj.isbn} mx="auto">
+                  <BookCard
+                    isbn={obj.isbn}
+                    imageUrl={obj.imageUrl}
+                    title={obj.title}
+                    author={obj.author}
+                    isLending={obj.isLending}
+                    onClick={onClickBook}
+                  />
+                </WrapItem>
+                ))}
+              </>
+            ) : (
+              <>
+                {books.map(obj => (
+                <WrapItem key={obj.isbn} mx="auto">
+                  <BookCard
+                    isbn={obj.isbn}
+                    imageUrl={obj.imageUrl}
+                    title={obj.title}
+                    author={obj.author}
+                    isLending={obj.isLending}
+                    onClick={onClickBook}
+                  />
+                </WrapItem>
+                ))}
+              </>
+            )}
+          </Wrap>
+        </>
       )}
       <BookDetailModal
         isOpen={isOpen}
